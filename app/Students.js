@@ -1,72 +1,110 @@
-import { ListItemTitle } from '@rneui/base/dist/ListItem/ListItem.Title'
-import { Button, Icon, ListItem, Switch, Text } from '@rneui/themed'
-import React, { useState } from 'react'
-import { FlatList, View } from 'react-native'
+import React, { useState } from 'react';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 
-export default function Students() {
-  let x = {
-    '001': { name: 'John', class: '2', att: true },
-    '002': { name: 'Alice', class: '2', att: true },
-    '003': { name: 'Bob', class: '2', att: true },
-    '004': { name: 'Charlie', class: '2', att: true },
-    '005': { name: 'David', class: '2', att: true },
-    '006': { name: 'Eva', class: '2', att: true },
-    '007': { name: 'Frank', class: '2', att: true },
-    '008': { name: 'Grace', class: '2', att: true },
-    '009': { name: 'Henry', class: '2', att: true },
-    '010': { name: 'Ivy', class: '2', att: true },
-    '011': { name: 'Jack', class: '2', att: true },
-    '012': { name: 'Kelly', class: '2', att: true },
-    '013': { name: 'Leo', class: '2', att: true },
-    '014': { name: 'Mia', class: '2', att: true },
-    '015': { name: 'Nathan', class: '2', att: true },
-    '016': { name: 'Olivia', class: '2', att: true },
-    '017': { name: 'Peter', class: '2', att: true },
-    '018': { name: 'Quinn', class: '2', att: true },
-    '019': { name: 'Riley', class: '2', att: true },
-    '020': { name: 'Sam', class: '2', att: true },
-  }
+const StudentsPage = () => {
+  const [students, setStudents] = useState([
+    { id: '1', name: 'Ayan', grade: 'Class 1' },
+    { id: '2', name: 'Steve Smith', grade: 'Class 1' },
+    { id: '3', name: 'Markram', grade: 'Class 2' },
+    { id: '4', name: 'Adil', grade: 'Class 2' },
+    { id: '1', name: 'Ayan', grade: 'Class 3' },
+    { id: '2', name: 'Steve Smith', grade: 'Class 3' },
+    { id: '3', name: 'Markram', grade: 'Class 4' },
+    { id: '4', name: 'Adil', grade: 'Class 4' },
+    { id: '1', name: 'Ayan', grade: 'Class 5' },
+    { id: '2', name: 'Steve Smith', grade: 'Class 5' },
+    { id: '3', name: 'Markram', grade: 'Class 6' },
+    { id: '4', name: 'Adil', grade: 'Class 6' },
+    { id: '3', name: 'Markram', grade: 'Class 7' },
+    { id: '4', name: 'Adil', grade: 'Class 7' },
+    { id: '3', name: 'Markram', grade: 'Class 8' },
+    { id: '4', name: 'Adil', grade: 'Class 8' },
+  ]);
 
-  const [students, setStudents] = useState(x)
-  console.log(Object.entries(x));
+  const [selectedClass, setSelectedClass] = useState(null);
 
-  function showItem({ item }) {
-    return (<ListItem topDivider bottomDivider containerStyle={{ paddingHorizontal: 10, paddingVertical: 5 }}>
-      <ListItem.Content>
-        <ListItem.Title style={{ fontWeight: 'bold', fontSize: 18 }}>{item[1].name}</ListItem.Title>
-        <ListItem.Subtitle>Class: {item[1].class}</ListItem.Subtitle>
-      </ListItem.Content>
-      <Icon
-        name={item[1].att ? 'check-circle' : 'cancel'}
-        color={item[1].att ? 'green' : 'red'}
-        size={30}
-        style={{ padding: 15 }}
-        onPress={() => markAtt(item[0])}
-      />
-    </ListItem>)
+  const classes = ['Class 1', 'Class 2', 'Class 3', 'Class 4', 'Class 5', 'Class 6', 'Class 7', 'Class 8', 'Class 9', 'Class 10'];
 
-  }
-  function markAtt(key) {
-    x = { ...students }
-    x[key].att = !x[key].att
-    setStudents(x)
-  }
-  function headerComp() {
+  const handleSelectClass = (className) => {
+    setSelectedClass(className);
+  };
+
+  const renderClassGrid = () => {
     return (
-      <View style={{ flex: 1, justifyContent: 'space-between', flexDirection: 'row' }}>
-        <Text h3>Students</Text>
-        <Button onPress={() => console.log('submitted')}>Submit</Button>
+      <View style={styles.gridContainer}>
+        {classes.map((className, index) => (
+          <TouchableOpacity key={index} style={styles.gridItem} onPress={() => handleSelectClass(className)}>
+            <Text style={styles.gridItemText}>{className}</Text>
+          </TouchableOpacity>
+        ))}
       </View>
-    )
-  }
-  return (
-    <>
+    );
+  };
+
+  const renderStudentsList = () => {
+    const filteredStudents = students.filter(student => student.grade === selectedClass);
+    return (
       <FlatList
-        ListHeaderComponent={headerComp}
-        ListHeaderComponentStyle={{ padding: 10 }}
-        data={Object.entries(students)}
-        renderItem={showItem}
+        data={filteredStudents}
+        renderItem={renderStudentItem}
+        keyExtractor={item => item.id}
       />
-    </>
-  )
-}
+    );
+  };
+
+  const renderStudentItem = ({ item }) => (
+    <TouchableOpacity style={styles.item}>
+      <Text style={styles.name}>{item.name}</Text>
+      <Text style={styles.grade}>{item.grade}</Text>
+    </TouchableOpacity>
+  );
+
+  return (
+    <View style={styles.container}>
+      {selectedClass ? renderStudentsList() : renderClassGrid()}
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  gridContainer: {
+    color: 'blue',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  gridItem: {
+    width: '45%',
+    height: 100,
+    backgroundColor: 'skyblue',
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  gridItemText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  item: {
+    flex: 1,
+    borderRadius: 5,
+    backgroundColor: '#f0f0f0',
+    padding: 20,
+    marginVertical: 10,
+  },
+  name: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  grade: {
+    fontSize: 16,
+  },
+});
+
+export default StudentsPage;
