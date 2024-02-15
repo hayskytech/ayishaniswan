@@ -24,6 +24,8 @@
       }
     },
     "web": {
+      "output": "static",
+      "bundler": "metro",
       "favicon": "./assets/favicon.png"
     },
     "scheme": "com.ayishaniswan.com",

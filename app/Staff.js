@@ -35,9 +35,9 @@ const StaffPage = () => {
 
   const renderStaffMember = ({ item }) => (
     <View style={styles.staffMember}>
-      <Text>Name: {item.name} <br></br>
-        Subject: {item.subject}<br></br>
-        Phone: {item.phone}</Text>
+      <Text>Name: {item.name} </Text>
+      <Text>  Subject: {item.subject}</Text>
+      <Text>Phone: {item.phone}</Text>
       <Icon name="delete" color='red' onPress={() => removeStaffMember(item.id)} />
     </View>
   );
