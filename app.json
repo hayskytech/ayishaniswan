@@ -30,7 +30,17 @@
     },
     "scheme": "com.ayishaniswan.com",
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "expo-localization",
+      "expo-secure-store",
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/NotoNastaliqUrdu-VariableFont_wght.ttf"
+          ]
+        }
+      ]
     ]
   }
 }
