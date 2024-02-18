@@ -6,7 +6,8 @@ import { router } from 'expo-router';
 import { createContext, useEffect, useState } from 'react';
 import { useFonts } from 'expo-font';
 import * as SecureStore from 'expo-secure-store';
-
+import Update from '../others/Update';
+const logo = require('../assets/logo1.png')
 
 export const MyContext = createContext(null)
 export default function Layout() {
@@ -22,9 +23,11 @@ export default function Layout() {
       setLang(result)
     }
   }
+
   useEffect(() => {
     getValueFor('lang')
   }, [])
+
   useEffect(() => {
     if (lang === 'ur') {
       setFont('Noto-Nastaliq-Urdu')
@@ -33,7 +36,7 @@ export default function Layout() {
     }
     save('lang', lang)
   }, [lang])
-  console.log(lang);
+
   const [fontsLoaded] = useFonts({
     'Noto-Nastaliq-Urdu': require('../assets/fonts/NotoNastaliqUrdu-VariableFont_wght.ttf'),
   })
@@ -77,15 +80,18 @@ export default function Layout() {
     return (
       <SafeAreaProvider>
         <SafeAreaView>
+          <Update />
           <View style={{ marginTop: 20 }}>
-            <Image source={{ uri: `https://ayishaniswan.com/wp-content/uploads/2022/03/cropped-aishaniswan-logo.jpg` }}
-              style={{ maxHeight: 250, minHeight: 150, width: '100%', objectFit: 'contain' }}
+            <Image source={logo}
+              style={{ maxHeight: 250, minHeight: 250, width: '100%', objectFit: 'contain' }}
             />
-            <Text style={{ fontFamily: 'Noto-Nastaliq-Urdu' }}>جامعہ محمدیہ عائشہ نسوان</Text>
+
             <FlatList
               data={items}
               renderItem={({ item }) =>
-                <ListItem onPress={() => router.push(item.link)}>
+                <ListItem
+                  bottomDivider topDivider
+                  onPress={() => router.push(item.link)}>
                   <Icon name={item.icon} />
                   <ListItem.Content>
                     <ListItem.Title>{item.name}</ListItem.Title>

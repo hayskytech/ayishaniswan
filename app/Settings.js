@@ -51,11 +51,6 @@ export default function Settings() {
           onPress={() => router.push('/')}
           title='Back to Home' />
 
-        <Text>
-          اردو - جامعہ محمدیہ عائشہ نسوان
-        </Text>
-
-
       </View>
     </ScrollView>
   )

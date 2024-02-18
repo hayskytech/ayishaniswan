@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "ayishaniswan",
+    "name": "Ayisha Niswan",
     "slug": "ayishaniswan",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -18,15 +18,17 @@
       "supportsTablet": true
     },
     "android": {
+      "versionCode": 2,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.ayishaniswan.com"
     },
     "web": {
       "output": "static",
       "bundler": "metro",
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/logo1.png"
     },
     "scheme": "com.ayishaniswan.com",
     "plugins": [
@@ -41,6 +43,14 @@
           ]
         }
       ]
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "92d77745-c7b4-4bdd-a074-a67397a37116"
+      }
+    }
   }
 }

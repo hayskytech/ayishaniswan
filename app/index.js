@@ -1,8 +1,9 @@
-import { Button, ThemeProvider, useTheme, Text, Card, Icon, Dialog, ListItem } from '@rneui/themed'
-import { Stack, router } from 'expo-router';
-import React, { useContext, useEffect, useState } from 'react'
-import { Image, Pressable, ScrollView, View } from 'react-native'
+import { Image, Text, Card, Icon, Dialog, ListItem } from '@rneui/themed'
+import { router } from 'expo-router';
+import React, { useContext, useState } from 'react'
+import { TouchableOpacity, ScrollView, View } from 'react-native'
 import { MyContext } from './_layout';
+const banner = require('../assets/banner1.jpg')
 // import { getLocales } from 'expo-localization';
 // const landCode = getLocales()[0].languageCode;
 
@@ -34,10 +35,10 @@ export default function index() {
         </ListItem>
       </Dialog>
       <View style={{ padding: 10 }}>
-        {/* <Stack.Screen options={{ title: 'Jamia Mohammadia Ayisha Niswan' }} /> */}
-        <Image source={{ uri: `https://ayishaniswan.com/wp-content/uploads/2022/04/ayisha-niswan-kurnool.jpg` }}
-          style={{ maxHeight: 250, minHeight: 180, width: '100%', objectFit: 'contain' }}
-        // style={{ width: '100%', height: 'auto', resizeMode: 'contain' }}
+        <Image
+          // source={{ uri: `https://ayishaniswan.com/wp-content/uploads/2022/04/ayisha-niswan-kurnool.jpg` }}
+          source={banner}
+          style={{ height: 150, width: 'auto', resizeMode: 'contain' }}
         />
       </View>
 
@@ -48,52 +49,52 @@ export default function index() {
         </Text>
         <Card.Divider />
         <View style={ss.view}>
-          <Pressable style={ss.card} onPress={() => router.push('Departments')}>
+          <TouchableOpacity style={ss.card} onPress={() => router.push('Departments')}>
             <Icon name='list-alt' size={35} />
             <Text style={ss.text}>
               {lang === 'en' && 'Departments'}
               {lang === 'ur' && 'شعبه جات'}
             </Text>
-          </Pressable>
-          <Pressable style={ss.card} onPress={() => router.push('posts')}>
+          </TouchableOpacity>
+          <TouchableOpacity style={ss.card} onPress={() => router.push('AllPosts')}>
             <Icon name='list-alt' size={35} />
             <Text style={ss.text}>
               {lang === 'en' && 'All Posts'}
               {lang === 'ur' && 'تمام پوسٹس'}
             </Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
         <View style={ss.view}>
-          <Pressable style={ss.card} onPress={() => router.push('About')}>
+          <TouchableOpacity style={ss.card} onPress={() => router.push('About')}>
             <Icon name='person' size={35} />
             <Text style={ss.text}>
               {lang === 'en' && 'About us'}
               {lang === 'ur' && 'ہمارے بارے میں'}
             </Text>
-          </Pressable>
-          <Pressable style={ss.card} onPress={() => router.push('Donate')}>
+          </TouchableOpacity>
+          <TouchableOpacity style={ss.card} onPress={() => router.push('Donate')}>
             <Icon name='favorite' size={35} />
             <Text style={ss.text}>
               {lang === 'en' && 'Donate'}
               {lang === 'ur' && 'عطیہ'}
             </Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
         <View style={ss.view}>
-          <Pressable style={ss.card} onPress={() => router.push('Contact')}>
+          <TouchableOpacity style={ss.card} onPress={() => router.push('Contact')}>
             <Icon name='call' size={35} />
             <Text style={ss.text}>
               {lang === 'en' && 'Contact'}
               {lang === 'ur' && 'رابطہ'}
             </Text>
-          </Pressable>
-          <Pressable style={ss.card} onPress={() => router.push('Settings')}>
+          </TouchableOpacity>
+          <TouchableOpacity style={ss.card} onPress={() => router.push('Settings')}>
             <Icon name='settings' size={35} />
             <Text style={ss.text}>
               {lang === 'en' && 'Settings'}
               {lang === 'ur' && 'ترتیبات'}
             </Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
       </Card>
 
